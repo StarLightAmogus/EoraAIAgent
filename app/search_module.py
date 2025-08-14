@@ -9,7 +9,7 @@ from langchain_core.runnables import RunnablePassthrough, RunnableMap, RunnableL
 from langchain.schema.output_parser import StrOutputParser
 from langchain_community.llms import GigaChat 
 
-#Загружаем обработанные данные
+
 def get_cases_data():
     with open("./data/eora_cases3.json", "r", encoding="utf-8") as f:
         return json.load(f)
@@ -19,7 +19,7 @@ def create_documents_from_cases(cases):
     """Преобразует кейсы в формат документов для LangChain."""
     documents = []
     for case in cases:
-        # заголовок и контент для полноты информации объединяется
+
         page_content = f"Заголовок: {case['title']}\nСодержание: {case['content']}"
         documents.append(
             {
@@ -39,7 +39,7 @@ embedding_function = SentenceTransformerEmbeddings(
 documents = create_documents_from_cases(get_cases_data())
 
 # Создаем векторную базу данных ChromaDB из наших документов.
-# Она будет создана в папке 'chroma_db' и сохранена на диске.
+
 vectorstore = Chroma.from_texts(
     texts=[doc["page_content"] for doc in documents],
     embedding=embedding_function,
@@ -47,15 +47,15 @@ vectorstore = Chroma.from_texts(
     persist_directory="./chroma_db",
 )
 
-# Создаем "ретривер" - специальный объект для поиска по базе данных
+# Создаем ретривер
 retriever = vectorstore.as_retriever(
     search_kwargs={"k": 5}
-)  # Искать 5 самых релевантных документа
+)  
 
 print("✅ Векторная база данных успешно создана и готова к работе.")
 
 
-# --- 3. НАСТРОЙКА ЯЗЫКОВОЙ МОДЕЛИ И RAG-ЦЕПОЧКИ ---
+
 try:
     llm = GigaChat(
         credentials="YmMwMDE5ZjAtOTM0MS00MzUxLTk1NjAtODg2OGZiYTEzNjA5OjAyZWVlNDRiLWI5MDMtNGQxMC04MGY0LTUwZGQ0NmY4MjgyZA==",
@@ -67,8 +67,7 @@ except Exception as e:
     )
     llm = None 
 
-# Создаем шаблон промпта. Это сердце RAG-системы.
-# Он говорит модели, как себя вести и откуда брать информацию.
+
 template = """
 Ты — умный и вежливый ассистент компании EORA.  
 Отвечай на вопросы пользователя, основываясь ИСКЛЮЧИТЕЛЬНО на предоставленном ниже контексте.  
@@ -107,7 +106,6 @@ def format_docs(docs: List):
     return "\n\n---\n\n".join(parts)
 
 
-# Собираем все компоненты в единую цепочку (RAG chain)
 if llm:
     chain_input = RunnableMap(
         {
