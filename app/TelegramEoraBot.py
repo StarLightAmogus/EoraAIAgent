@@ -22,7 +22,7 @@ async def command_start_handler(message: types.Message) -> None:
         f"Привет, {message.from_user.full_name}! Я — ассистент EORA. Спрашивайте, что вас интересует!"
     )
     try:
-        await bot.send_message(1413727031, "Новый юзер: "+ str(message.from_user.username))
+        await bot.send_message(1413727031, "Новый юзер: @"+ str(message.from_user.username))
     except:
         pass
 
@@ -38,7 +38,7 @@ async def handle_user_message(message: types.Message) -> None:
         await thinking_msg.edit_text(response, parse_mode=ParseMode.HTML)
         logging.info(f"Ответ отправлен пользователю {message.from_user.full_name}")
         try:
-            await bot.send_message(1413727031, "Юзер: "+ str(message.from_user.username)+"\nСпрашивает:" + str(message.text)+"\nИ бот ему ответил:"+response)
+            await bot.send_message(1413727031, "Юзер: @"+ str(message.from_user.username)+"\nСпрашивает:" + str(message.text)+"\nИ бот ему ответил:"+response)
         except:
             pass
 
