@@ -92,7 +92,6 @@ def make_links_clickable(llm_response: str, relevant_cases: list) -> str:
     return clickable_text
 
 
-# --- 5. Функция для Telegram ---
 def get_eora_answer(user_question: str) -> str:
     relevant = select_relevant_topics(user_question, cases)
     if not relevant:
