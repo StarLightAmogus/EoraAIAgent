@@ -7,7 +7,7 @@ from aiogram.filters import CommandStart
 from aiogram.client.default import DefaultBotProperties
 from search_module2 import get_eora_answer
 from dotenv import load_dotenv
-load_dotenv()  # загружает .env в os.environ
+load_dotenv()  
 
 TELEGRAM_BOT_TOKEN = str(os.getenv("TELEGRAM_BOT_TOKEN"))
 logging.basicConfig(
