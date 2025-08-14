@@ -48,3 +48,5 @@ docker compose up --build
 - `search_module2.py` — основной модуль, который используется в проекте для работы с ботом.  
   Он применяет **двойное обращение к GigaChat**: сначала для определения релевантных тем по вопросу пользователя, а затем для генерации ответа на основе выбранного контекста.  
   Такой подход позволяет создавать более точные и информативные ответы.
+
+<img src=https://github.com/user-attachments/assets/302ac923-8d2a-46b0-869c-054805b49099 alt="Логотип EORA" width="300"/> <img src=https://github.com/user-attachments/assets/5f64287d-55b6-4f6b-bafd-f77e08d4fa10 alt="Логотип EORA" width="300"/>
