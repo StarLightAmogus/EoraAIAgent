@@ -1,0 +1,31 @@
+services:
+  parser:
+    build: ./
+    container_name: parser
+    command: python parser.py
+    env_file:
+      - ./.env
+    volumes:
+      - ./data:/app/data
+
+  text_cleaner:
+    build: ./
+    container_name: text_cleaner
+    command: python text_cleaner.py
+    env_file:
+      - ./.env
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - parser
+
+  telegram_bot:
+    build: ./
+    container_name: telegram_bot
+    command: python TelegramEoraBot.py
+    env_file:
+      - ./.env
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - text_cleaner
