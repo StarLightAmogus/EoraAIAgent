@@ -9,7 +9,7 @@ GIGACHAT_CREDENTIALS = os.getenv("GIGACHAT_CREDENTIALS")
 
 def get_cases_data():
     """Возвращает список кейсов с коротким контекстом."""
-    with open("./data/eora_cases3.json", "r", encoding="utf-8") as f:
+    with open("./data/eora_cases.json", "r", encoding="utf-8") as f:
         cases = json.load(f)
     # Формат: {"id": 1, "title": "...", "content": "...", "url": "..."}
     return cases
